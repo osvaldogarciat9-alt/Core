@@ -54,7 +54,7 @@ const urlsToCache = [
     </head>
     <body style="background-color:black; display:flex; flex-direction:column; justify-content:center; align-items:center; height:100vh;">
 
-        <img src="img/ct.png" alt="Imagen Offline" style="margin-bottom:20px;">
+        <img src="/Core/img/ct.png" alt="Imagen Offline" style="margin-bottom:20px;">
 
         <h1 style="color:white; text-align:center;">
             Se necesita conexión para funcionar
