@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Panel Administrativo | OneCore</title>
+
+  <!-- Bootstrap & Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/pouchdb@8.0.1/dist/pouchdb.min.js"></script>
+
+  <style>
+    body {
+      background-color: #f5f7fb;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* --- SIDEBAR --- */
+    .sidebar {
+      background: linear-gradient(180deg, #0d47a1, #1976d2);
+      color: white;
+      width: 250px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 0;
+      transition: all .4s ease;
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .sidebar ul { list-style: none; padding: 0; margin-top: 30px; }
+
+    .sidebar ul li {
+      padding: 15px 25px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 0.3s;
+      user-select: none;
+    }
+
+    .sidebar ul li:hover,
+    .sidebar ul li.active {
+      background: rgba(255,255,255,0.2);
+    }
+
+    .sidebar .logout {
+      text-align: center;
+      padding: 15px;
+      background: rgba(255,255,255,0.15);
+      cursor: pointer;
+    }
+
+    /* --- MAIN --- */
+    .main {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 30px;
+    }
+
+    .header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:30px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .card {
+      border:none;
+      border-radius:12px;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .table th {
+      background-color:#1976d2;
+      color:white;
+    }
+
+    .btn-primary {
+      background-color:#1565c0;
+      border:none;
+    }
+
+    .btn-primary:hover {
+      background-color:#0d47a1;
+    }
+
+    footer {
+      text-align:center;
+      font-size:0.9rem;
+      color:#777;
+      margin-top:20px;
+    }
+
+    @media (max-width: 992px) {
+      body { flex-direction: column; }
+      .sidebar { width: 100%; flex-direction: row; align-items: center; padding: 10px; }
+      .sidebar h2 { display:none; }
+      .sidebar ul { display: flex; flex-direction: row; margin: 0; flex-grow: 1; justify-content: space-around; }
+      .sidebar ul li { padding: 10px; font-size: 0.9rem; flex-direction: column; gap: 5px; }
+      .logout { padding: 10px; font-size: 0.85rem; }
+      .main { padding: 15px; }
+      .card { margin-bottom: 15px; }
+    }
+
+    @media (max-width: 576px) {
+      .header h1 { font-size: 1.4rem; }
+      .table-responsive { overflow-x: auto; }
+      .sidebar ul li i { font-size: 1rem; }
+      .sidebar ul li { font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div>
+      <h2>OneCore Admin</h2>
+      <ul>
+        <li class="active"><i class="bi bi-speedometer2"></i> Dashboard</li>
+        <li><i class="bi bi-list-check"></i> Tareas</li>
+        <li><i class="bi bi-chat-text"></i> Opiniones</li>
+        <li><i class="bi bi-gear"></i> Configuración</li>
+      </ul>
+    </div>
+
+    <div class="logout" onclick="cerrarSesion()">
+      <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main">
+    <div class="header">
+      <h1>Panel Administrativo</h1>
+      <span class="text-muted">Bienvenido al sistema OneCore</span>
+    </div>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+      <div class="row g-4">
+        <div class="col-md-6 col-12">
+          <div class="card p-3 text-center" style="cursor:pointer" onclick="irATareas()">
+            <i class="bi bi-list-task fs-1 text-success"></i>
+            <h5 class="mt-2">Tareas registradas</h5>
+            <h3 id="totalTareas">0</h3>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-12">
+          <div class="card p-3 text-center" style="cursor:pointer" onclick="irAOpiniones()">
+            <i class="bi bi-chat-left-quote fs-1 text-primary"></i>
+            <h5 class="mt-2">Opiniones recibidas</h5>
+            <h3 id="totalOpiniones">0</h3>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAREAS -->
+    <section id="tareas" class="d-none">
+      <div class="card p-4 mt-3">
+        <h3 class="text-primary mb-4"><i class="bi bi-list-check"></i> Gestión de Tareas</h3>
+
+        <form id="formTareas">
+          <div class="row g-3">
+            <div class="col-md-4 col-12"><input type="text" class="form-control" id="tituloTarea" placeholder="Título de la tarea" required></div>
+            <div class="col-md-4 col-12"><input type="text" class="form-control" id="descripcionTarea" placeholder="Descripción" required></div>
+            <div class="col-md-4 col-12">
+              <select id="estadoTarea" class="form-select">
+                <option value="Pendiente">Pendiente</option>
+                <option value="En progreso">En progreso</option>
+                <option value="Completada">Completada</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3 w-100">Agregar Tarea</button>
+        </form>
+
+        <div class="table-responsive mt-4">
+          <table class="table table-striped" id="tablaTareas">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Descripción</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- OPINIONES -->
+    <section id="opinionesAdmin" class="d-none">
+      <div class="card p-4 mt-3">
+        <h3 class="text-primary mb-4"><i class="bi bi-chat-text"></i> Opiniones de Usuarios</h3>
+
+        <div class="table-responsive">
+          <table class="table table-striped" id="tablaOpiniones">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Opinión</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONFIGURACIÓN -->
+    <section id="config" class="d-none">
+      <div class="card p-4 mt-3">
+        <h3 class="text-primary mb-3"><i class="bi bi-gear"></i> Configuración del sistema</h3>
+        <button class="btn btn-danger" id="btnReset">🗑️ Borrar todos los datos</button>
+      </div>
+    </section>
+
+    <footer><p>© 2025 OneCore | Panel Administrativo</p></footer>
+  </div>
+
+  <!-- JAVASCRIPT -->
+  <script>
+    const dbTareas = new PouchDB('tareas_db');
+    const dbOpiniones = new PouchDB('opiniones_db');
+
+    /* ================== NAVEGACIÓN ================== */
+    function mostrarSeccion(id, liElemento) {
+      document.querySelectorAll('section').forEach(s => s.classList.add('d-none'));
+      document.getElementById(id).classList.remove('d-none');
+
+      document.querySelectorAll('.sidebar ul li').forEach(li => li.classList.remove('active'));
+      if (liElemento) liElemento.classList.add('active');
+    }
+
+    function irATareas() {
+      const menu = document.querySelectorAll(".sidebar ul li");
+      mostrarSeccion("tareas", menu[1]);
+      cargarTareas();
+    }
+
+    function irAOpiniones() {
+      const menu = document.querySelectorAll(".sidebar ul li");
+      mostrarSeccion("opinionesAdmin", menu[2]);
+      cargarOpiniones();
+    }
+
+    /* ================== CRUD TAREAS ================== */
+    async function guardarTarea(e) {
+      e.preventDefault();
+      const titulo = tituloTarea.value.trim();
+      const descripcion = descripcionTarea.value.trim();
+      const estado = estadoTarea.value;
+
+      if (!titulo || !descripcion) return alert('Completa todos los campos');
+
+      await dbTareas.put({
+        _id: new Date().toISOString(),
+        titulo, descripcion, estado
+      });
+
+      formTareas.reset();
+      cargarTareas();
+      actualizarEstadisticas();
+      alert('Tarea agregada ✅');
+    }
+
+    async function cargarTareas() {
+      const result = await dbTareas.allDocs({ include_docs: true, descending: true });
+      const tbody = document.querySelector('#tablaTareas tbody');
+      tbody.innerHTML = '';
+
+      result.rows.forEach(r => {
+        const t = r.doc;
+        const color =
+          t.estado === 'Pendiente' ? 'text-danger' :
+          t.estado === 'En progreso' ? 'text-warning' :
+          'text-success';
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${t.titulo}</td>
+            <td>${t.descripcion}</td>
+            <td class="${color} fw-bold">${t.estado}</td>
+            <td>
+              <button class="btn btn-success btn-sm me-1" onclick="cambiarEstadoPrompt('${t._id}')">Cambiar</button>
+              <button class="btn btn-danger btn-sm" onclick="eliminarTarea('${t._id}')">Eliminar</button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    async function eliminarTarea(id) {
+      if (!confirm('¿Eliminar tarea?')) return;
+      const doc = await dbTareas.get(id);
+      await dbTareas.remove(doc);
+      cargarTareas();
+      actualizarEstadisticas();
+    }
+
+    async function cambiarEstadoPrompt(id) {
+      const doc = await dbTareas.get(id);
+      const nuevo = prompt("Nuevo estado:", doc.estado);
+      if (!nuevo) return;
+      doc.estado = nuevo;
+      await dbTareas.put(doc);
+      cargarTareas();
+    }
+
+    /* ================== CRUD OPINIONES ================== */
+    async function cargarOpiniones() {
+      const result = await dbOpiniones.allDocs({ include_docs: true, descending: true });
+      const tbody = document.querySelector('#tablaOpiniones tbody');
+      tbody.innerHTML = '';
+
+      result.rows.forEach(r => {
+        const o = r.doc;
+
+        tbody.innerHTML += `
+          <tr>
+            <td>${o.nombre}</td>
+            <td>${o.opinion}</td>
+            <td>
+              <button class="btn btn-success btn-sm me-1" onclick="editarOpinion('${o._id}')">Editar</button>
+              <button class="btn btn-danger btn-sm" onclick="eliminarOpinion('${o._id}')">Eliminar</button>
+            </td>
+          </tr>`;
+      });
+    }
+
+    async function editarOpinion(id) {
+      const doc = await dbOpiniones.get(id);
+      const nuevoTexto = prompt("Nueva opinión:", doc.opinion);
+      if (!nuevoTexto) return;
+
+      doc.opinion = nuevoTexto;
+      await dbOpiniones.put(doc);
+
+      cargarOpiniones();
+      actualizarEstadisticas();
+      alert("Opinión actualizada ✔");
+    }
+
+    async function eliminarOpinion(id) {
+      if (!confirm("¿Eliminar opinión?")) return;
+
+      const doc = await dbOpiniones.get(id);
+      await dbOpiniones.remove(doc);
+
+      cargarOpiniones();
+      actualizarEstadisticas();
+      alert("Opinión eliminada ❌");
+    }
+
+    /* ================== CONFIG RESET ================== */
+    async function resetDB() {
+      if (!confirm("¿Eliminar TODAS las tareas y opiniones?")) return;
+      await dbTareas.destroy();
+      await dbOpiniones.destroy();
+      location.reload();
+    }
+
+    function cerrarSesion() {
+      alert("Sesión cerrada");
+      location.href = "index.html";
+    }
+
+    /* ================== CONTADORES ================== */
+    async function actualizarEstadisticas() {
+      const tareas = await dbTareas.allDocs();
+      const opiniones = await dbOpiniones.allDocs();
+
+      document.getElementById("totalTareas").textContent = tareas.total_rows;
+      document.getElementById("totalOpiniones").textContent = opiniones.total_rows;
+    }
+
+    /* ================== INICIO ================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".sidebar ul li");
+
+      items.forEach((li, index) => {
+        li.addEventListener("click", () => {
+          if (index === 0) mostrarSeccion("dashboard", li);
+          else if (index === 1) irATareas();
+          else if (index === 2) irAOpiniones();
+          else mostrarSeccion("config", li);
+        });
+      });
+
+      formTareas.addEventListener("submit", guardarTarea);
+      btnReset.addEventListener("click", resetDB);
+
+      mostrarSeccion("dashboard", items[0]);
+      cargarTareas();
+      cargarOpiniones();
+      actualizarEstadisticas();
+    });
+  </script>
+
+</body>
+</html>
+
+
+
+

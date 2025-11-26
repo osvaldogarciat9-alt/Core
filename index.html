@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>PWA OneCore Group</title>
+  <meta name="description" content="Esta sería la descripción de mi PWA" />
+  <link rel="manifest" href="./manifest.json" />
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" />
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f7fa;
+      color: #1e1e1e;
+      scroll-behavior: smooth;
+    }
+
+    /* ---------------------- SPLASH SCREEN ---------------------- */
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a3d91, #2196f3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 99999;
+      color: white;
+      text-align: center;
+      animation: fadeOut 1s ease forwards;
+      animation-delay: 2.8s;
+    }
+
+    #splash img {
+      width: 150px;
+      margin-bottom: 20px;
+      animation: zoom 2s infinite alternate;
+    }
+
+    @keyframes zoom {
+      from {
+        transform: scale(1);
+      }
+
+      to {
+        transform: scale(1.1);
+      }
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, #0a3d91, #2196f3);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .navbar-brand {
+      font-weight: 700;
+      color: #fff !important;
+      letter-spacing: 1px;
+    }
+
+    .nav-link {
+      color: #e3f2fd !important;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-link:hover {
+      color: #fff !important;
+    }
+
+    .btn-login {
+      background-color: white;
+      color: #1565c0 !important;
+      font-weight: 600;
+      border-radius: 30px;
+      padding: 6px 18px !important;
+      transition: 0.3s;
+    }
+
+    .btn-login:hover {
+      background-color: #e3f2fd;
+      transform: scale(1.05);
+    }
+
+    /* Hero */
+    .hero {
+      background: linear-gradient(120deg, #1565c0, #42a5f5);
+      color: white;
+      padding: 120px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-top: 15px;
+    }
+
+    .hero img {
+      width: 160px;
+      margin-top: 30px;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    section {
+      padding: 70px 20px;
+    }
+
+    h2 {
+      font-weight: 700;
+      color: #0d47a1;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .service-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-10px);
+    }
+
+    .service-card i {
+      font-size: 3rem;
+      color: #1976d2;
+      margin-bottom: 15px;
+    }
+
+    #about {
+      background-color: #e3f2fd;
+      border-radius: 12px;
+    }
+
+    #qsomos {
+      background-color: #ffffff;
+    }
+
+    footer {
+      background-color: #0d47a1;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 0.9rem;
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Notificaciones Push */
+    #notificaciones .card {
+      border-radius: 18px;
+      border: none;
+      background: white;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    #notificaciones h3 {
+      font-weight: 700;
+      color: #0a3d91;
+    }
+
+    #notificaciones button {
+      padding: 12px 20px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: 0.3s;
+    }
+
+    #notificaciones button i {
+      margin-right: 6px;
+    }
+
+    #notificaciones button:hover {
+      transform: scale(1.05);
+    }
+
+    #status {
+      font-size: 1.1rem;
+      color: #0d47a1;
+      padding: 10px 0;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <!-- SPLASH -->
+  <div id="splash">
+    <img src="img/icon_256.png" alt="Logo OneCore" />
+    <h2>Bienvenidos a OneCore Group</h2>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="#">OneCore</a>
+
+      <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">Sobre Nosotros</a></li>
+          <li class="nav-item"><a class="nav-link" href="#servicios">Servicios</a></li>
+          <li class="nav-item"><a class="nav-link" href="#qsomos">Equipo</a></li>
+          <li class="nav-item"><a class="nav-link btn-login" href="admin.html"><i class="bi bi-person-circle"></i> Login</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>Transformamos tus ideas en experiencias digitales</h1>
+      <p>Innovación, estrategia y tecnología al servicio de tu marca 💡</p>
+      <img src="img/icon_256.png" alt="Logo OneCore" />
+    </div>
+  </section>
+
+  <!-- Sobre Nosotros -->
+  <section id="about" class="fade-in">
+    <div class="container text-center">
+      <h2>Sobre OneCore</h2>
+      <p class="lead">Somos una agencia tecnológica enfocada en desarrollar soluciones digitales modernas, desde sitios web y apps hasta videojuegos y marketing digital.</p>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section id="servicios" class="fade-in">
+    <div class="container">
+      <h2>Nuestros Servicios</h2>
+      <div class="row text-center">
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-controller"></i>
+            <h4>Desarrollo de Videojuegos</h4>
+            <p>Creamos experiencias inmersivas y entretenidas.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-bullseye"></i>
+            <h4>Marketing Digital</h4>
+            <p>Impulsamos tu marca con estrategias efectivas.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-share"></i>
+            <h4>Gestión de Redes Sociales</h4>
+            <p>Contenido atractivo y análisis para tu crecimiento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quiénes Somos -->
+  <section id="qsomos" class="fade-in">
+    <div class="container text-center">
+      <h2>¿Quiénes Somos?</h2>
+      <p class="mb-5">Un equipo apasionado por la innovación digital.</p>
+
+      <div class="row text-center">
+
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-flag"></i>
+            <h4>Misión</h4>
+            <p>Transformar ideas en soluciones digitales innovadoras.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-eye"></i>
+            <h4>Visión</h4>
+            <p>Ser líderes tecnológicos en América Latina.</p>
+          </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+          <div class="service-card">
+            <i class="bi bi-heart"></i>
+            <h4>Valores</h4>
+            <p>Innovación, calidad, compromiso y trabajo en equipo.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ⭐⭐⭐ CATÁLOGO DE CLIENTES ⭐⭐⭐ -->
+<section id="clientes" class="py-5 fade-in">
+  <div class="container text-center">
+    <h2 class="mb-4">Nuestros Clientes</h2>
+    <p class="mb-5">Aliados que confían en nuestro trabajo y visión.</p>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Cliente 1: Bet Games -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 h-100 client-card">
+          <img src="img/bitGames.png" class="client-img mb-3" alt="Bet Games">
+          <h5 class="fw-bold">Bit Games</h5>
+          <p>Empresa de videojuegos,que quiere evolucionar en el mundo gamer .</p>
+        </div>
+      </div>
+
+      <!-- Cliente 2: Tu Espacio TI -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 h-100 client-card">
+          <img src="img/espacioTi.png" class="client-img mb-3" alt="Tu Espacio TI">
+          <h5 class="fw-bold">Tu Espacio TI</h5>
+          <p>Redes sociales de la carrera de TIID de la universidad Tecnologica de Huejotzingo .</p>
+        </div>
+      </div>
+
+      <!-- Cliente 3: Dancito Shop -->
+      <div class="col-md-4">
+        <div class="card shadow-lg p-3 h-100 client-card">
+          <img src="img/DancitoShop.png" class="client-img mb-3" alt="Dancito Shop">
+          <h5 class="fw-bold">Dancito Shop</h5>
+          <p>Una tienda de cosas personalizadas,papeleria creativa y mas.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ ESTILOS SUGERIDOS (agrega en tu CSS) ⭐⭐⭐ -->
+<style>
+  .client-card {
+    border-radius: 15px;
+    transition: transform .2s;
+  }
+
+  .client-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .client-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+</style>
+
+
+  <!-- Notificaciones Push -->
+  <section id="notificaciones" class="fade-in">
+    <div class="container d-flex justify-content-center">
+      <div class="col-lg-8">
+        <h2 class="text-center">¿Quieres recibir ofertas y novedades?</h2>
+
+        <div class="card p-4 shadow-lg">
+          <h3 class="text-center">Suscríbete y recibe promociones 🚀</h3>
+
+          <div class="d-flex gap-3 flex-wrap mt-3 justify-content-center">
+            <button id="btn-suscribir" class="btn btn-primary">
+              <i class="bi bi-bell"></i> Suscribirse
+            </button>
+            <button id="btn-test" class="btn btn-secondary" disabled>
+              <i class="bi bi-send"></i> Oferta Especial
+            </button>
+            <button id="btn-oferta" class="btn btn-success" disabled>
+              <i class="bi bi-gift"></i> Descuentos
+            </button>
+          </div>
+
+          <div id="status" class="mt-3 fw-bold text-center"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ⭐⭐⭐ DEJA TU OPINIÓN (POUCHDB) ⭐⭐⭐ -->
+<section id="opiniones" class="fade-in">
+  <div class="container">
+    <h2>Déjanos tu Opinión</h2>
+    <p class="text-center mb-4">Tu experiencia nos ayuda a mejorar 💙</p>
+
+    <div class="card p-4 shadow-lg col-lg-8 mx-auto">
+      <div class="mb-3">
+        <label class="fw-bold">Tu nombre:</label>
+        <input type="text" id="nombre" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="fw-bold">Tu opinión:</label>
+        <textarea id="opinion" class="form-control" rows="3"></textarea>
+      </div>
+
+      <button class="btn btn-primary w-100 mb-3" id="guardarOpinion">
+        <i class="bi bi-chat-dots"></i> Guardar Opinión
+      </button>
+
+      <h4 class="mt-4 text-center">Opiniones Guardadas</h4>
+      <ul id="listaOpiniones" class="list-group mt-3"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ⭐⭐⭐ CONTACTO INFORMATIVO ⭐⭐⭐ -->
+<section id="contacto-info" class="mt-5 py-5" style="background:#f8f9fa;">
+  <div class="container">
+    <h2 class="text-center mb-4">Contacto</h2>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Teléfono -->
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3 h-100 text-center">
+          <i class="bi bi-telephone-fill fs-1 text-primary mb-3"></i>
+          <h5 class="fw-bold">Teléfono</h5>
+          <p class="m-0">+52 2225283130</p>
+        </div>
+      </div>
+
+      <!-- Correo -->
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3 h-100 text-center">
+          <i class="bi bi-envelope-fill fs-1 text-danger mb-3"></i>
+          <h5 class="fw-bold">Correo Electrónico</h5>
+          <p class="m-0">contacto@onecore.com</p>
+        </div>
+      </div>
+
+      <!-- Ubicación -->
+      <div class="col-md-4">
+        <div class="card shadow-sm p-3 h-100 text-center">
+          <i class="bi bi-geo-alt-fill fs-1 text-success mb-3"></i>
+          <h5 class="fw-bold">Ubicación</h5>
+          <p class="m-0">Puebla ,Pue</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+  <!-- Footer -->
+  <footer>
+    © 2025 OneCore | Todos los derechos reservados 💙
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Animaciones scroll
+    const fadeElements = document.querySelectorAll('.fade-in');
+    window.addEventListener('scroll', () => {
+      fadeElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) el.classList.add('visible');
+      });
+    });
+
+    // Ocultar splash después de 3s
+    window.onload = () => {
+      setTimeout(() => {
+        document.getElementById("splash").style.opacity = "0";
+        setTimeout(() => {
+          document.getElementById("splash").style.display = "none";
+        }, 800);
+      }, 3000);
+    };
+  </script>
+
+  <!-- PouchDB -->
+  <script src="https://cdn.jsdelivr.net/npm/pouchdb@7.3.1/dist/pouchdb.min.js"></script>
+
+  <script>
+    const db = new PouchDB("opiniones_db");
+
+    document.getElementById("guardarOpinion").addEventListener("click", async () => {
+      const nombre = document.getElementById("nombre").value.trim();
+      const opinion = document.getElementById("opinion").value.trim();
+
+      if (!nombre || !opinion) {
+        alert("Por favor llena ambos campos.");
+        return;
+      }
+
+      await db.put({
+        _id: new Date().toISOString(),
+        nombre,
+        opinion
+      });
+
+      document.getElementById("nombre").value = "";
+      document.getElementById("opinion").value = "";
+
+      cargarOpiniones();
+    });
+
+    async function cargarOpiniones() {
+      const lista = document.getElementById("listaOpiniones");
+      lista.innerHTML = "";
+
+      const data = await db.allDocs({ include_docs: true, descending: true });
+
+      data.rows.forEach(item => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+
+        li.innerHTML = `
+          <strong>${item.doc.nombre}</strong><br>
+          ${item.doc.opinion}
+        `;
+
+        lista.appendChild(li);
+      });
+    }
+
+    cargarOpiniones();
+  </script>
+
+  <!-- Otros scripts de tu app -->
+  <script src="assets/app.js"></script>
+  <script src="js/scripts.js"></script>
+  <script src="js/script1.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+

@@ -1,0 +1,123 @@
+{
+    "6913d1a370570": {
+        "suscripcion": {
+            "endpoint": "https:\/\/jmt17.google.com\/fcm\/send\/dOQq39lLeCQ:APA91bGKUZDC9x_TLSDdG_HbDqxEmyeD1xTRk-3pYZgwHX2MM_2Wc6RcvcIo9bafW2zT-8QJJU16hG4Uh0eTsbHjqYysd0rUakws3SxtHrWm64PHtSzxNmmTY-WuMXuLNjdYURk1FBPX",
+            "keys": {
+                "p256dh": "BOxChiJnZUqI2gj12zh23XSoVUVgoN5kfYx9coJ6b09J8pS\/f0U8xKZoho2CzeA3Ym5FAY9bWLhTNcbrc4PiawE=",
+                "auth": "7cL\/IHNVYSHECElkntZh9Q=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-12 01:15:31"
+    },
+    "6913d8d3e6fa7": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/fXGQXd59Af0:APA91bECJOyqk3FPYMyFjV5xcAlfx1NORsvlXZ0tNYalrmyG9X3Kbe07usKdFe9PxcwQwi76Q_THf0WDUjpD2tawvp1-PXQjO-ybGcNnH5My8A_UdPMzChWLlEn3hYXNyJV0uIY9xDoi",
+            "keys": {
+                "p256dh": "BFAOfUOi++dUjOrwpA6Pfd6f65jF8EAoI0rhXv4xaluK281s5eo30\/HQXSbaSCnYqfbJQJ5lT0cOGN0joxU7mYY=",
+                "auth": "mZE3Ycr\/WnB\/e40uDx7jMw=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-12 01:46:11"
+    },
+    "69156659dfa89": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/cb4l63yZQYA:APA91bFTAcaDrM6flEbmlys9ahH7HDNYMaaMCogbIQHON6JqxMABpzYyiE6sMF8deKt7Fa0mApmCUIVWxZeYfyKLRJqAz80ZruRIfIiebLUBAvVU3sgJZ74CaPxIp5ZSzZwmzMgdlfoD",
+            "keys": {
+                "p256dh": "BA4fJKqz4hFROKoB0ca9vaDW\/gQV+RB\/roXl8lW5MD\/j\/Ph+qUP4ZXaWmndFYliCp\/HU49kxhMfHQrTffjF+mkc=",
+                "auth": "i5ANvOiSB0D3iXFopLcSpg=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-13 06:02:17"
+    },
+    "691d10800a3e2": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/eo5SmGY0bVU:APA91bFopFCn5Rm5oBAgHC0_a_ZFpcohdqYBFrs19Suj_uwcSXRZtAQ7Q2mOoaeYkQcJX__0ntOrrj3MmIt6_tIqrlKkekafMKwK1WnGwJke0W9WhhfZoqaQr3KJc0K8ATq1oSlkWcUS",
+            "keys": {
+                "p256dh": "BFiI7gjgU33iSAXmof+1rS9nzN7SOYMfThDxnsQ9LnZg6+0vbmpO1N1VbN0\/IIx4SQsRWY4p2\/ODbE1+Ihug\/Uc=",
+                "auth": "\/mJ0EKkLi5qH1EZsBfD7fQ=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-19 01:34:08"
+    },
+    "69252ceaecf16": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/fthcZ53IH1Q:APA91bEkk3pHd_I8CQr9aCDpNPAsShCU36ppSlith0-R7SNc_EWYv3JLBsAABjfV4FTuFftiU_O61BRxtW5lQUnJbQE0keVMO_hEfctJxxxd7007SRniXMmmF0UgVZ7AZZjS0MYuK_Y3",
+            "keys": {
+                "p256dh": "BIlwk5c3ti2LY+25kU83xb3OkwJVABfEiYC2CMWXMeDAqh4cKmjAI\/V\/x0O8KLImj2XsK+1fW0snr9linBi9ZIE=",
+                "auth": "hMS3DmIkGltkFt5vw6M7Dg=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 05:13:30"
+    },
+    "69253389adb35": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/dyl99qm83lQ:APA91bHTPbnlnX1B5hX7-4o63Uh3T56xy3usO1gVS1pEtTnlbwsHbP-Aei0HzioTPdNFXhF6me_a1hq5GOUH3OQdv5DEqOATSLfAGpMTG9CNj3VyFz6My3EG3VSF2jyxhEIsonb0DNAa",
+            "keys": {
+                "p256dh": "BBVp7vFfdWOIU8hh\/N+qbydLSi6hqVcpGbtmG45PNgPZS29RTMew+4VHLyzg2aqJMNsSvbq3OGvL136mUihd\/j8=",
+                "auth": "GGjly8NtmimxBYAmiIJETQ=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 05:41:45"
+    },
+    "6925375707026": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/fVB0i3g4RH0:APA91bGV0YfzfyoFMI3B_M3W6PcK9zlymPkahn8yRwL-YXPTQmRR3lDowLqDMbl3wif_0gKwh3ypg8cOn6Uu0_WROSALTz7mxX38oHlkeEULaO4pkYhNdWh8mQGwCUsULuNZEydOBw3m",
+            "keys": {
+                "p256dh": "BDUtdMR\/GZGt9YY5Ox2KAYM2IEtDjPV3Ym87+zznm4O6Z8Wi8SZrv+\/j0gwE3lkuYdz9XLMUpSw2PZPDotVIfuE=",
+                "auth": "pqPbS1vLgfjxucivCt6AUw=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 05:57:59"
+    },
+    "692540a06d317": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/ecr7nvcWRDM:APA91bEDx6VH9VNuW-xT8yJGArbFgPI-POk1KBpMPXfEI3i73Wx6BTHElYt1jWL4lDzv367ie_TFjH6s23n3VUZIF-bjDTdtKvS47orpSSk5OO8tVErZiibVjDAUrItppOsQ653_vRIn",
+            "keys": {
+                "p256dh": "BDtiLBRi+gYygE6Wke3JVDrU\/zo0bPHwh5\/d5vZuZDRKAgj5sw+C3PHPeZzf4h2oJdTYYpyFMJ7JRheuivgT8ko=",
+                "auth": "JOny\/cQLqHXsQBj\/cOzUXg=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 06:37:36"
+    },
+    "692628c243c65": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/e1ZP_R6dS0M:APA91bG2bWMc-8W5lFMAzWN_HUssWekKQAUsqMAuAfr58aBkvcbylHIlZUQesyL_yIwR_q02GYy8amdeDOKv_cVj1kSERP651vKDUpFZkMBQr9xk_7_yk2FGipXdae85dbjulGi8EQzH",
+            "keys": {
+                "p256dh": "BIUUzkOr6SYYLGH2moEXt3PTgCTihPUJIH3wND8qAxt0iDzCarMldgPtiITv+q1NQFHpbEovk0PwNr4GU\/eMCgY=",
+                "auth": "1z53owcDaponoMUI7WY0Xw=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 23:08:02"
+    },
+    "69262d7eaad54": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/d6CYgJNjYE4:APA91bE7i1D4Bp99E8WVFJ-zm0pYwoihNAxaNXkIHBHc7EcOxgtKi_KMglrYJyQgk5_vfTe0VMJI9EciOTSqz-R8ynWc24gcL8ED3Wap6XVX79qFeZBWXZkr1t5KRuu5WWA7F9i2U7R3",
+            "keys": {
+                "p256dh": "BJiw5mQ9NM8L0Na1ddmlgAcJmuC8+BIE7LEa5DXDRwsrDM+9t24KZhYVtB54C82UlRxLndSWfZsmdhmI1HGGJ0M=",
+                "auth": "Md7aJ1QvEbMSKeivHelzYg=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-25 23:28:14"
+    },
+    "692639d2dcd93": {
+        "suscripcion": {
+            "endpoint": "https:\/\/fcm.googleapis.com\/fcm\/send\/cDdldXoA1co:APA91bF1z0wNATRqBKWiRFk184wBbtfik_3d4-y1racFu2IYjMXmSRiyAnSuA2wWsgPI5EgwEYGoUky-pM5RcVy-uGwrqls2YeQsq6VUgV0mF0qoPkMjn0O3WZXUUdN3g-Lldcbjd_N7",
+            "keys": {
+                "p256dh": "BC81osb8Ql0\/vuTmy4q7uJBKSKmPnLOH3mcG+dkclDRfS0zM1ZlxB5wKhPN5VeyvkNiLF6aJ5Bp80qaFWmHBmsY=",
+                "auth": "5v\/CrXu+WDVpyAEom63xGA=="
+            }
+        },
+        "categoria": "estudiante",
+        "fecha": "2025-11-26 00:20:50"
+    }
+}

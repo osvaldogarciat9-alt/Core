@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Empresa OneCore Group</title>
+  <style>
+    /* Fondo animado con gradiente */
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(-45deg, #1a73e8, #4facfe, #00c6ff, #0072ff);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Caja principal */
+    .login-box {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      padding: 40px 30px;
+      width: 320px;
+      text-align: center;
+      color: white;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-weight: 600;
+      font-size: 24px;
+      color: #fff;
+    }
+
+    /* Campos de texto */
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.85);
+      font-size: 15px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    input:focus {
+      background: #fff;
+      box-shadow: 0 0 5px #4facfe;
+    }
+
+    /* Botón */
+    button {
+      width: 100%;
+      background: linear-gradient(90deg, #1a73e8, #4facfe);
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #0056d1, #007bff);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Mensaje de error */
+    .error {
+      color: #ff6b6b;
+      font-size: 14px;
+      margin-top: 10px;
+      min-height: 20px;
+    }
+
+    /* Logo o ícono opcional */
+    .logo {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      background: white url('https://cdn-icons-png.flaticon.com/512/3135/3135715.png') center/60% no-repeat;
+      display: inline-block;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="logo"></div>
+    <h2>Login Empresa OneCore Group</h2>
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="password" id="contraseña" placeholder="Contraseña">
+    <p id="error" class="error"></p>
+    <button onclick="login()">Iniciar Sesión</button>
+  </div>
+
+  <script>
+    function login() {
+      const usuario = document.getElementById("usuario").value;
+      const contraseña = document.getElementById("contraseña").value;
+      const error = document.getElementById("error");
+
+      if (usuario === "CORE" && contraseña === "123456789") {
+        window.location.href = "dashboard.html";
+      } else {
+        error.textContent = "⚠️ Usuario o contraseña incorrectos.";
+      }
+    }
+  </script>
+
+</body>
+</html>
