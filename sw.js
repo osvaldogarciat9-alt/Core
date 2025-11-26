@@ -1,13 +1,14 @@
   //asignar un nombre y versión al cache
-  const CACHE_NAME = 'v1_pwa_app_cache',
-    urlsToCache = [
-      './',
-      'index.html',
-      'css/style.css',
-      'js/script.js',
-      'img/mainlogo.png',
-      'img/favicon.png'
-    ]
+const CACHE_NAME = 'v1_pwa_app_cache';
+const urlsToCache = [
+  '/Core/',
+  '/Core/index.html',
+  '/Core/css/style.css',
+  '/Core/js/script.js',
+  '/Core/img/mainlogo.png',
+  '/Core/img/favicon.png'
+];
+
 
   //durante la fase de instalación, generalmente se almacena en caché los activos estáticos
   self.addEventListener('install', e => {
